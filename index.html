@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Styled Todo List</title>
+  </head>
+  <body>
+    <div class="todo-container">
+      <h2>Todo List</h2>
+      <input type="text" id="taskInput" placeholder="Add a new task..." />
+      <button id="addtask">Add</button>
+
+      <div class="completed-section">
+        <h3>Completed Tasks</h3>
+        <ul id="completedTasks">
+          <!-- Completed tasks will be dynamically added here -->
+        </ul>
+      </div>
+
+      <div class="uncompleted-section">
+        <h3>Uncompleted Tasks</h3>
+        <ul id="uncompletedTasks">
+          <!-- Uncompleted tasks will be dynamically added here -->
+        </ul>
+      </div>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 100px;
+            /* background-color: aqua; */
+            margin-top: 200px;
+
+        }
+
+        #todoList {
+            /* max-width: 300px; */
+            margin: 0 auto;
+            background-color: whitesmoke;
+            width: 700px;
+            text-align: center;
+            height: 200px;
+            padding: 100px;
+        }
+
+        input[type="text"] {
+            width: 350px;
+            padding: 8px;
+            margin: 10px 0;
+            background-color: transparent;
+            border-radius: 20px;
+            border-width: 1px;
+    
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .deleteButton, .completeButton, .uncompleteButton {
+            cursor: pointer;
+            color: white;
+            margin-left: 10px;
+            background-color: green;
+            height: 10px;
+            text-align: center;
+            padding: 10px;
+
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: #808080;
+        }
+    </style>
+</head>
+<body>
+    <div id="todoList">
+        <h2>Todo List</h2>
+        <input type="text" id="taskInput" placeholder="Add a new task...">
+        <button onclick="addTask()" style="background-color: green; border: none;border-radius: 10px; width: 80px; margin-left: 30px; height: 30px;">Add</button>
+
+        <h3>UNCOMPLETED TASK</h3>
+        <ul id="tasks">
+            <!-- Task items will be added dynamically here -->
+        </ul>
+
+        <h3>COMPLETED TASK</h3>
+        <ul id="completedTasks">
+            <!-- Completed task items will be added dynamically here -->
+        </ul>
+    </div>
+
+    <script>
+        const tasksList = document.getElementById("tasks");
+        const completedTasksList = document.getElementById("completedTasks");
+
+        function addTask() {
+            const taskInput = document.getElementById("taskInput");
+            const taskText = taskInput.value.trim();
+
+            if (taskText === "") {
+                //alert("Please enter a task!");
+                return;
+            }
+
+            // Create a new task item
+            const li = document.createElement("li");
+            li.innerHTML = `${taskText} 
+                <span class="completeButton" onclick="completeTask(this)">Complete</span>
+                 
+                <span class="deleteButton" onclick="deleteTask(this)">Delete</span>`;
+
+            // Add the new task to the list
+            tasksList.appendChild(li);
+
+            // Clear the input field
+            taskInput.value = "";
+        }
+
+        function completeTask(element) {
+            const listItem = element.parentNode;
+            listItem.classList.add("completed");
+
+            // Move the completed task to the completedTasksList
+            completedTasksList.appendChild(listItem);
+        }
+
+        function uncompleteTask(element) {
+            const listItem = element.parentNode;
+            listItem.classList.remove("completed");
+
+        //     // Move the uncompleted task back to the tasksList
+            tasksList.appendChild(listItem);
+        }
+
+        function deleteTask(element) {
+            const listItem = element.parentNode;
+            
+            // Check if the task is in tasksList or completedTasksList
+            if (listItem.parentNode === tasksList) {
+                tasksList.removeChild(listItem);
+            } else {
+                completedTasksList.removeChild(listItem);
+            }
+        }
+    </script>
+</body>
+</html>
